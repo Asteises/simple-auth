@@ -1,29 +1,29 @@
 package ru.asteises.simpleauth.security;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.asteises.simpleauth.model.User;
+import ru.asteises.simpleauth.model.entity.User;
 
 import java.util.Collection;
-import java.util.Collections;
 
+@Getter
+@Setter
+@RequiredArgsConstructor
 public class CustomUserDetails implements UserDetails {
 
     private final User user;
 
-    public CustomUserDetails(User user) {
-        this.user = user;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return user.getRoles();
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return user.getFirstname();
     }
 
     @Override
