@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import ru.asteises.simpleauth.model.entity.Role;
 
 @Getter
 @Setter
@@ -23,5 +24,6 @@ public class UserRegDto {
     @Size(min = 2, max = 100, message = "Last name must be from 2 to 100 characters")
     private String lastname;
 
-    private String role;
+    @NotEmpty
+    private Role role;
 }

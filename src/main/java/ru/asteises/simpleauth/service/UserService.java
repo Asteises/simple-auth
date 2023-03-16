@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.asteises.simpleauth.model.User;
 import ru.asteises.simpleauth.model.dto.UserRegDto;
+import ru.asteises.simpleauth.model.entity.User;
 import ru.asteises.simpleauth.storage.UserRepository;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -24,7 +26,7 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(userRegDto.getPassword()));
         user.setFirstname(userRegDto.getFirstname());
         user.setLastname(userRegDto.getLastname());
-//        user.setRole(Role.valueOf(userRegDto.getRole()));
+        user.setRoles(List.of(userRegDto.getRole()));
 
         log.info("Save user: {}", user);
         userRepository.save(user);
